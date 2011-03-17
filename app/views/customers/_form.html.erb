@@ -40,7 +40,7 @@
 
    <p><%= f.label Customer.human_attribute_name :forward_email %>
     <%= f.text_field :forward_email %>
-    <div class="hint"><%= t('.forward_email_info', :email =>  @customer.name + "@" + RYWEB["email_alias_domain"]) %></div>
+    <div class="hint"><%= t('.forward_email_info', :email =>  @customer.name + "@" + RYWEB["email_alias"]["domain"]) %></div>
    </p>
 
    <p><%= f.label :radio_url, 'Nettiradiolinkki' %>

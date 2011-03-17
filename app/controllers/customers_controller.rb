@@ -16,7 +16,7 @@ class CustomersController < ApplicationController
   # GET /customers/1.xml
   def show
     @customer = Customer.with_permissions_to(:show).find(params[:id])
-
+    get_forward_email
     @customer.ui_template = UiTemplate.new unless @customer.ui_template
 
     respond_to do |format|

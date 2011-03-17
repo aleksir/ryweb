@@ -154,6 +154,7 @@ fi:
       customer:
         name: "Järjestelmä nimi"
         title: "Yhdistyksen nimi"
+        forward_email: Sähköpostin edelleenohjaus
       layout:
         name: "Nimi"
         content: "Sisältö"
@@ -210,3 +211,6 @@ fi:
     more_camps: "Lisää leirejä"
     error_camps_not_found: "Virhe: Leirilista ei saatavilla"
     listen_to_netradio: "Kuuntele nettiradiota"
+  customers:
+    form:
+      forward_email_info: "Tähän osoitteeseen ohjataan {{email}} osoitteeseen saapuneet sähköpostit"

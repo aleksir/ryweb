@@ -41,6 +41,7 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit
     @customer = Customer.with_permissions_to(:edit).find(params[:id])
+    get_forward_email
     @ui_templates = UiTemplate.find(:all)
   end
 
@@ -51,6 +52,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
+        update_forward_email
         flash[:notice] = 'Uusi yhdistys lisätty.'
         format.html { redirect_to(customer_url(:id => @customer)) }        
         format.xml  { render :xml => @customer, :status => :created, :location => @customer }
@@ -70,6 +72,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
+        update_forward_email
         flash[:notice] = 'Yhdistyksen tiedot päivitetty.'
         format.html { redirect_to(customer_url) }        
         format.xml  { head :ok }
@@ -89,6 +92,28 @@ class CustomersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(customers_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  private
+
+  def update_forward_email
+    begin
+      RestClient.put( RYWEB["email_alias"]["server_url"] + "/forward/" + @customer.name + "@" + RYWEB["email_alias"]["domain"],
+                      :destination => @customer.forward_email )
+    rescue
+      logger.info "Can't connect to Email Alias server (#{RYWEB["email_alias"]["server_url"]})"
+    end
+  end
+
+  def get_forward_email
+    begin
+      result = RestClient.get RYWEB["email_alias2"]["server_url"] + "/forward/" + @customer.name + "@" + RYWEB["email_alias"]["domain"]
+      unless result.empty?
+        @customer.forward_email = JSON.parse(result)["destination"]
+      end
+    rescue
+      logger.info "Can't connect to Email Alias server (#{RYWEB["email_alias"]["server_url"]})"
     end
   end
 end

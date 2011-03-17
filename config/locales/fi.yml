@@ -215,4 +215,3 @@ fi:
   customers:
     form:
       forward_email_info: "Tähän osoitteeseen ohjataan {{email}} osoitteeseen saapuneet sähköpostit"
-k

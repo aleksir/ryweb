@@ -6,6 +6,8 @@ class Customer < ActiveRecord::Base
   validates_presence_of     :name
   validates_presence_of     :title
 
+  attr_accessor :forward_email
+
   def self.current
     Thread.current['customer']
   end

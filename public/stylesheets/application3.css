@@ -60,6 +60,13 @@ label {
   font-weight:bold;
 }
 
+.hint {
+   margin-left: 26%;
+   margin-top: -10px;
+   font-size: 10px;
+   color: gray;
+}
+
 textarea {
  /*   width:400px;
     padding:2px;

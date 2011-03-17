@@ -126,6 +126,8 @@ ol.ol li {
 
 .icon_listen { background-image: url(../images/icon_listen.png) !important; }
 
+.icon_printer { float: right; background-image: url(../images/icon_printer.png) !important; }
+
 strong {
 	font-weight: bold;
 }

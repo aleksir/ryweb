@@ -1,0 +1,201 @@
+<html>
+  <head>
+    <style>
+      /* PAGE, HEADERS, FOOTERS */
+
+      .header { position: running(header) }
+
+            /* First page css without header and footer */
+
+            /*@page :first {
+                  border-top: none;
+                  border-bottom: none;
+                  @top-left {
+                    content: normal;
+                            }
+                  @top-right {
+                    content: normal;
+                   }
+                  @bottom-left {
+                    content: normal;
+                          }
+                  @bottom-right {
+                    content: normal;
+                          }
+
+                  }*/
+
+            /* Common css of all pages */
+            @page {
+              size: A4 landscape;
+              /*border-top: 1px solid black;*/
+              border-bottom: 1px solid black;
+                          margin: 8% 5% 6% 6%;
+              counter-increment: page;
+
+              @top-left {
+                content: element(header);
+                vertical-align: bottom;
+                padding: 3px;
+
+              }
+
+              @top-center {
+                font-family : Arial, Helvetica, sans-serif;
+                font-size: 24px;
+                text-align: center;
+                content: "<%= @page.title %>";
+
+                vertical-align: bottom;
+                padding: 3px;
+
+              }
+              @top-right {
+                font-family : Arial, Helvetica, sans-serif;
+                font-size: 14px;
+                text-align: right;
+                content: "<%= @customer.title %>";
+                vertical-align: bottom;
+                padding: 3px;
+              }
+
+              @bottom-left {
+                font-family : Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                content: "";
+                vertical-align: top;
+                padding: 3px;
+              }
+
+              @bottom-right {
+                font-family : Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                content: "sivu " counter(page) " / " counter(pages);
+                vertical-align: top;
+                padding: 3px;
+                text-align: right;
+
+              }
+
+            }
+
+        /* BODY CSS */
+
+        body {
+          font-size: 13px;
+          font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        p.small-text { font-size: 11px; }
+
+        #calendar {
+          font-size: 110%;
+          border: 5px solid #d5d5d5;
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+
+        #calendar .day, #calendar .date, #calendar .time {
+                white-space: nowrap;
+        }
+
+        #calendar td {
+                padding: 4px 8px;
+                background-color: #f8f8f8;
+                border-bottom: 1px solid #d5d5d5;
+                color: #333333;
+                vertical-align: top;
+        }
+
+        #calendar th {
+                background-color: #d5d5d5;
+                padding: 10px 8px;
+                color: #000000;
+                text-align: left;
+                font-size: 120%;
+        }
+
+        #calendar tr.even td {
+                background-color: #f0f0f0;
+        }
+
+        #calendar tr.next td {
+                background-color: #e1f0fb;
+        }
+
+        #calendar td.event {
+                font-weight: bold;
+        }
+
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+        }
+
+        .table {
+                width: 100%;
+                margin-bottom: 20px;
+                font-size: 1.1em;
+        }
+
+  </style>
+  
+  </head>
+<body>
+
+<% if @page.calendar? %>
+    <% if @page.parameter_calendar_type == 'kk' %>
+      
+      <table id="calendar">
+      <% @occasion_months.sort.each do |month, occasions| %>
+      <thead><tr><th colspan ="6"><strong><%= t('date.month_names')[month.strftime('%m').to_i] %></strong></th></tr></thead>
+      <tbody><% for occasion in occasions %>
+      <tr>
+        <td class="day"><%= t('date.abbr_day_names')[occasion.start_time.wday] %></td>
+        <td class="date"><%= localize occasion.start_time, :format => :very_short %></td>
+        <td class="time"><% unless occasion.start_time_only_str == "00:00" %><%= occasion.start_time_only_str %><% end %></td>
+        <td class="event"><%= occasion.name %></td>
+        <td class="locale"><% if occasion.location %><%= occasion.location.name %><% end %></td>
+        <td class="info"><%= occasion.public_info %></td>
+      </tr><% end %>
+      </tbody>
+      <% end %>
+      </table>
+
+    <% elsif @page.parameter_calendar_type == 'vk' %>
+        <table id="calendar">
+        <% @occasion_weeks.sort.each do |week, occasions| %>
+        <thead><tr><th colspan ="6"><strong><%= t('public.week') %><%= "&nbsp;" + week.strftime('%W') %></strong></th></tr></thead>
+        <tbody><% for occasion in occasions %>
+        <tr>
+          <td class="day"><%= t('date.abbr_day_names')[occasion.start_time.wday] %></td>
+          <td class="date"><%= localize occasion.start_time, :format => :very_short %></td>
+          <td class="time"><% unless occasion.start_time_only_str == "00:00" %><%= occasion.start_time_only_str %><% end %></td>
+          <td class="event"><%= occasion.name %></td>
+          <td class="locale"><% if occasion.location %><%= occasion.location.name %><% end %></td>
+          <td class="info"><%= occasion.public_info %></td>
+        </tr><% end %>
+        </tbody>
+        <% end %>
+        </table>
+    <% elsif @page.parameter_calendar_type == 'pk' %>
+        <table id="calendar">
+        <% @occasion_locations.sort.each do |location, occasions| %>
+        <thead><tr><th colspan ="5"><strong><%= location %></strong></th></tr></thead>
+        <tbody><% for occasion in occasions %>
+        <tr>
+          <td class="day"><%= t('date.abbr_day_names')[occasion.start_time.wday] %></td>
+          <td class="date"><%= localize occasion.start_time, :format => :very_short %></td>
+          <td class="time"><% unless occasion.start_time_only_str == "00:00" %><%= occasion.start_time_only_str %><% end %></td>
+          <td class="event"><%= occasion.name %></td>
+          <td class="info"><%= occasion.public_info %></td>
+        </tr><% end %>
+        </tbody>
+        <% end %>
+        </table>
+    <% end %>
+<% end %>
+</body>
+
+</html>

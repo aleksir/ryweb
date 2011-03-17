@@ -108,7 +108,7 @@ class CustomersController < ApplicationController
 
   def get_forward_email
     begin
-      result = RestClient.get RYWEB["email_alias2"]["server_url"] + "/forward/" + @customer.name + "@" + RYWEB["email_alias"]["domain"]
+      result = RestClient.get RYWEB["email_alias"]["server_url"] + "/forward/" + @customer.name + "@" + RYWEB["email_alias"]["domain"]
       unless result.empty?
         @customer.forward_email = JSON.parse(result)["destination"]
       end

@@ -1,4 +1,5 @@
 class PublicController < ApplicationController
+  acts_as_flying_saucer
   layout 'public'
 
   require 'rss/2.0'
@@ -71,6 +72,18 @@ class PublicController < ApplicationController
       @layout = @page.layout
     else
       @layout = Customer.current.ui_template
+    end
+
+    respond_to do |format|
+      format.html # Show page.html.erb
+      format.pdf {
+        # Show printable calendar
+        
+        render_pdf :template => 'public/pdf.html',
+        :send_file => { :filename => "#{@page.title}.pdf",
+          :disposition => "attachment",
+          :type => "application/pdf"}
+      }
     end
   end
   

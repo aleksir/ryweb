@@ -166,7 +166,7 @@
     <% elsif @page.parameter_calendar_type == 'vk' %>
         <table id="calendar">
         <% @occasion_weeks.sort.each do |week, occasions| %>
-        <thead><tr><th colspan ="6"><strong><%= t('public.week') %><%= "&nbsp;" + week.strftime('%W') %></strong></th></tr></thead>
+        <thead><tr><th colspan ="6"><strong><%= t('public.week') %><%= " " + week.strftime('%W') %></strong></th></tr></thead>
         <tbody><% for occasion in occasions %>
         <tr>
           <td class="day"><%= t('date.abbr_day_names')[occasion.start_time.wday] %></td>

@@ -15,25 +15,25 @@
 	
 	<div>
           <p><%= label_tag 'name', 'Järjestelmän nimi' %>
-          <%= @customer.name.empty? ? "&nbsp;" : @customer.name %></p>
+          <%= @customer.name %></p>
           <p><%= label_tag 'title', 'Yhdistyksen nimi' %>
-          <%= @customer.title.empty? ? "&nbsp;" : @customer.title %></p>
+          <%= @customer.title %></p>
           <p><%= label_tag 'address', 'Lähiosoite' %>
-          <%= @customer.address.empty? ? "&nbsp;" : @customer.address %>asdf</p>
+          <%= @customer.address %></p>
           <p><%= label_tag 'zip_code', 'Postinumero' %>
-          <%= @customer.zip_code.empty? ? "&nbsp;" : @customer.zip_code %></p>
+          <%= @customer.zip_code %></p>
           <p><%= label_tag 'city', 'Postitoimipaikka' %>
-          <%= @customer.city.empty? ? "&nbsp;" : @customer.city %></p>
+          <%= @customer.city %></p>
           <p><%= label_tag 'phone', 'Puhelin' %>
-          <%= @customer.phone.empty? ? "&nbsp;" : @customer.phone %></p>
+          <%= @customer.phone %></p>
           <p><%= label_tag 'email', 'Sähköposti' %>
-          <%= @customer.email.empty? ? "&nbsp;" : @customer.email %></p>
+          <%= @customer.email %></p>
           <p><%= label :forward_email, Customer.human_attribute_name(:forward_email) %>
-          <%= @customer.forward_email.nil? ? "&nbsp;" : @customer.forward_email %></p>
+          <%= @customer.forward_email %></p>
           <p><%= label_tag 'radio_url', 'Nettiradiolinkki' %>
-          <%= @customer.radio_url.empty? ? "&nbsp;" : @customer.radio_url %></p>
+          <%= @customer.radio_url %></p>
           <p><%= label_tag 'ui_template.name', 'Ulkoasumalli' %>
-          <%= @customer.ui_template.name.nil? ? "&nbsp;" : @customer.ui_template.name %></p>
+          <%= @customer.ui_template.name %></p>
           <p><%= label_tag 'language', 'Kieli' %>
           <%= @customer.getOptionsForSelectList(:language).index(@customer.language) %></p>
           

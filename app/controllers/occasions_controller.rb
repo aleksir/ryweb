@@ -223,35 +223,48 @@ class OccasionsController < ApplicationController
   
   def select_month
      if params[:year]
-        new_date = Date.new(params[:year].to_i,params[:month].to_i)
+       new_time = Time.local(params[:year].to_i,params[:month].to_i)
 
         if params[:direction] =='back'
-          new_date = new_date.advance(:months => -1)
+           new_time = new_time.advance(:months => -1)
         elsif params[:direction] == 'forward'
-          new_date = new_date.advance(:months => 1)
+          new_time = new_time.advance(:months => 1)
         end
 
-       first_date = new_date.beginning_of_month # first day at 0:00:00
+       first_date = new_time.beginning_of_month # first day at 0:00:00
        last_date = first_date
+
        last_date = last_date.advance(:months => 1)
        last_date = last_date.beginning_of_month # first day of next month at 0:00:00
 
-      @occasions = Occasion.find(:all, :conditions => ["start_time > ? AND start_time < ?", first_date.to_date, last_date.to_date],:order => "start_time ASC")
+       # Notice that UTC time should be addressed to solve special events in the month boundary
+       first_date = first_date.utc
+       last_date = last_date.utc
 
-      @date = new_date
+      @occasions = Occasion.find(:all, :conditions => ["start_time >= ? AND start_time < ?", first_date.to_date, last_date.to_date],:order => "start_time ASC")
+
+      @date = new_time.to_date
+
       else
        if params[:start_date]
-        date_now = DateTime.parse(params[:start_date])
+        date_now = Time.parse(params[:start_date])
        else
           date_now = DateTime.now                
        end
-
+       
        first_date = date_now.beginning_of_month # first day at 0:00:00
        last_date = date_now.advance(:months => 1)
        last_date = last_date.beginning_of_month # first day of next month at 0:00:00
 
+       # Notice that UTC time should be addressed to solve special events in the month boundary
+       first_date = first_date.utc
+       last_date = last_date.utc
+       
+      puts first_date
+      puts last_date
+
        @occasions = Occasion.find(:all, :conditions => ["start_time > ? AND start_time < ?", first_date.to_date, last_date.to_date],:order => "start_time ASC")
-       @date = date_now
-   end
+       @date = date_now.to_date
+   end   
   end
 end

@@ -156,7 +156,7 @@
         <td class="date"><%= localize occasion.start_time, :format => :very_short %></td>
         <td class="time"><% unless occasion.start_time_only_str == "00:00" %><%= occasion.start_time_only_str %><% end %></td>
         <td class="event"><%=h occasion.name %></td>
-        <td class="locale"><% if occasion.location %><%= occasion.location.name %><% end %></td>
+        <td class="locale"><% if occasion.location %><%=h occasion.location.name %><% end %></td>
         <td class="info"><%=h occasion.public_info %></td>
       </tr><% end %>
       </tbody>
@@ -173,7 +173,7 @@
           <td class="date"><%= localize occasion.start_time, :format => :very_short %></td>
           <td class="time"><% unless occasion.start_time_only_str == "00:00" %><%= occasion.start_time_only_str %><% end %></td>
           <td class="event"><%=h occasion.name %></td>
-          <td class="locale"><% if occasion.location %><%= occasion.location.name %><% end %></td>
+          <td class="locale"><% if occasion.location %><%=h occasion.location.name %><% end %></td>
           <td class="info"><%=h occasion.public_info %></td>
         </tr><% end %>
         </tbody>
@@ -182,7 +182,7 @@
     <% elsif @page.parameter_calendar_type == 'pk' %>
         <table id="calendar">
         <% @occasion_locations.sort.each do |location, occasions| %>
-        <thead><tr><th colspan ="5"><strong><%= location %></strong></th></tr></thead>
+        <thead><tr><th colspan ="5"><strong><%=h location %></strong></th></tr></thead>
         <tbody><% for occasion in occasions %>
         <tr>
           <td class="day"><%= t('date.abbr_day_names')[occasion.start_time.wday] %></td>

@@ -3,7 +3,7 @@ class IndexController < ApplicationController
   # GET /customers
   # GET /customers.xml
  def index
-    @customers = Customer.find(:all, :order => "title ASC")
+    @customers = Customer.find(:all, :conditions => ["customer_type == ?",10],:order => "title ASC")
     @customer_index = @customers.group_by { |c| c.title.first }
 
     respond_to do |format|

@@ -1,0 +1,38 @@
+* { margin: 0; }
+
+body { 
+    background: #fff url(../images/tausta_yla.gif) repeat-x 0 -50px;
+}
+
+#container {
+    margin: 40px auto 0pt;
+    text-align: left;
+    width: 581px;
+    }
+
+#header {
+    background: url(../images/jasenyhdistykset.jpg) no-repeat;
+    text-align: center;
+    height: 140px;
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    border-right: 1px solid #dfdfdf;
+}
+
+
+#content {
+    padding: 5px 10px 10px 10px;
+    text-align: left; 
+    background: #fff;
+    border: 1px solid #dfdfdf;
+}
+
+#footer{ 
+    padding-top: 10px;
+    text-align: right;
+    font-size: 10px;
+    color: #cfcfcf;
+}
+
+
+.clear { clear: both; }

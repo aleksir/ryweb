@@ -2,8 +2,9 @@ class IndexController < ApplicationController
   
   # GET /customers
   # GET /customers.xml
-  def index
-    @customers = Customer.find(:all)
+ def index
+    @customers = Customer.find(:all, :order => "title ASC")
+    @customer_index = @customers.group_by { |c| c.title.first }
 
     respond_to do |format|
       format.html { render :layout => false }# index.html.erb

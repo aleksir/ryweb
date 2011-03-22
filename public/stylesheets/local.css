@@ -1,0 +1,106 @@
+body, p, td, div h1, h2, li, address {
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    color: #2f2f2f;
+}
+
+td, p, a, div, li, address {
+    font-size: 12px;
+}
+
+h1 {
+    margin: 5px 0 15px 0;
+    font-size: 19px;
+}
+
+h2 { 
+    margin: 5px 0 5px 0;
+    font-size: 17px;
+}
+
+h3 { 
+    margin: 5px 0 5px 0;
+    font-size: 15px;
+}
+
+a, a:visited, a:active { 
+    color: #0F96B4;
+    font-weight: bold;
+}
+
+p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+a:hover { 
+    text-decoration: none;
+}
+
+#rauhanyhdistykset {
+    margin: 20px;
+}
+
+#rauhanyhdistykset ul {
+    list-style: none;
+    padding-left: 20px;
+}
+#rauhanyhdistykset li {
+    padding: 2px 0 2px 0;
+}
+
+#rauhanyhdistykset li, a {
+    font-size: 12px;
+}
+
+#rauhanyhdistykset h2 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+#rauhanyhdistykset li {
+    padding-left: 20px;
+}
+
+#vapaa-teksti {
+    padding: 10px;
+    border: 1px solid #dfdfdf;
+    background: #efefef;
+}
+
+#kalenteri {
+    padding: 10px;
+    border: 1px solid #dfdfdf;
+    background: #efefef;
+}
+
+.kirjaimet {
+    text-align: center;
+    margin: 20px 0 20px 0;
+    padding-left: 0;
+}
+
+.kirjaimet li {
+    display: inline;
+    margin: 0 5px 10px 0px;
+    padding: 0px !important;
+}
+
+.kirjaimet li a {
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.kirjaimet li a:hover {
+    text-decoration: underline;
+}
+
+.kotisivu a  {
+    background: url(../images/bullet_go.png) no-repeat right 2px;
+    padding-right: 17px;
+    padding-top: 2px;
+}
+
+.blinder {
+  margin-top: 6px;
+}

@@ -1,11 +1,11 @@
 <script>
-	$(function() {
+        jQuery(document).ready(function($) {
 		$( "#occasion_location_id" ).autocomplete({
-			source: "http://localhost:3004/lahetysalue/occasions/locations",
+			source: "locations",
 			minLength: 2
 		});
                 $( "#occasion_occasion_type_id" ).autocomplete({
-			source: "http://localhost:3004/lahetysalue/occasions/occasion_types",
+			source: "occasion_types",
 			minLength: 2
 		});
 
@@ -31,7 +31,7 @@
 	<td><%= f.text_field :name, :size => 15 %><br /><div class="quickhelp">Seurat</div></td>
 	<td><%= f.text_field :location_id, :size => 15 %><br /><div class="quickhelp">Seurakuntatalo</div></td>
 	<td><%= f.text_field :occasion_type_id, :value => @occasion.occasion_type.name, :size => 13 %><br /><div class="quickhelp">Lähetyseurat</div></td>
-	<td><%= f.text_field :subject, :size => 15 %><br /><div class="quickhelp">Päivänteksi</div></td>
+	<td><%= f.text_field :subject, :size => 15 %><br /><div class="quickhelp">Päivän teksi</div></td>
         <td><%= f.submit "Tallenna" %></td>
 </tr>
 </tbody>

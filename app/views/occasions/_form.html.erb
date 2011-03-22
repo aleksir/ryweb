@@ -1,20 +1,41 @@
 <%= f.error_messages %>
 
+<script>
+        jQuery(document).ready(function($) {
+		$( "#occasion_location_id" ).autocomplete({
+			source: "locations",
+			minLength: 2
+		});
+                $( "#occasion_occasion_type_id" ).autocomplete({
+			source: "occasion_types",
+			minLength: 2
+		});
 
+	});
+</script>
 
 <p><%= label_tag 'name', 'Tapahtuma' %>
 <%= f.text_field :name %></p>
 
 
 <p><%= label_tag 'start_time', 'Aloitusaika' %>
-<%= f.text_field :start_time, :value=> localize(@occasion.start_time, :format => :date_picker) %></p>
+  <% if @occasion.start_time.nil? %>
+    <%= f.text_field :start_time, :value => localize(Time.now.at_beginning_of_day, :format => :date_picker) %></p>
+  <% else %>
+    <%= f.text_field :start_time, :value => localize(@occasion.start_time, :format => :date_picker) %></p>
+  <% end %>
 
 <p><%= label_tag 'repeat', 'Toisto' %>
   <%= f.select :repeat, @occasion.getOptionsForSelectList(:repeat), options ={:prompt => ""} %>
-  <%= f.text_field :repeat_until, :value=> localize(@occasion.repeat_until, :format => :short), :size => '10' %> asti
+  <% if @occasion.start_time.nil? %>
+    <%= f.text_field :repeat_until, :value => localize(Time.now.at_beginning_of_day.to_date, :format => :short) , :size => '10' %> asti
+  <% else %>
+    <%= f.text_field :repeat_until, :value => localize(@occasion.repeat_until, :format => :short), :size => '10' %> asti
+  <% end %>
+
 
 <p><%= label_tag 'occasion_type_id', 'Tapahtuman tyyppi' %>
-<p><%= text_field_with_auto_complete 'occasion', 'occasion_type_id', :value => @occasion.occasion_type.name %></p>
+<p><%= f.text_field :occasion_type_id, :value => @occasion.occasion_type.name %></p>
 
 <% if !Customer.current.radio_url.empty? %>
   <p><%= label_tag 'net_radio', 'Nettiradiolähetys' %>
@@ -25,7 +46,7 @@
 <p><%= text_field_with_auto_complete 'occasion', 'subject', :value => @occasion.subject %></p>
 
 <p><%= label_tag 'location_id', 'Paikka' %>
-<p><%= text_field_with_auto_complete 'occasion', 'location_id', :value => @occasion.location.name %></p>
+<p><%= f.text_field :location_id, :value => @occasion.location.name %></p>
 
 <p><%= label_tag 'state', 'Tila' %>
 <%= f.select :state, @occasion.getOptionsForSelectList(:state), options ={:prompt => ""} %></p>

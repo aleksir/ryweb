@@ -2,11 +2,11 @@ class OccasionsController < ApplicationController
    before_filter :login_required
    filter_resource_access
    filter_access_to :list, :calendar, :require => :read
-   filter_access_to :bulk_change, :auto_complete_for_occasion_location_id, :auto_complete_for_occasion_occasion_type_id, :require => [:create, :update]
+   filter_access_to :bulk_change, :locations, :occasion_types, :require => [:create, :update]
 
 
-   skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_occasion_location_id, :auto_complete_for_occasion_occasion_type_id]   
-#   skip_before_filter :verify_authenticity_token
+   skip_before_filter :verify_authenticity_token, :only => [:occasion_types, :locations]
+
    
   # GET /occasions
   # GET /occasions.xml
@@ -63,7 +63,7 @@ class OccasionsController < ApplicationController
     @occasion = Occasion.new
     unless params[:occasion_date].nil?
       @occasion.start_time = params[:occasion_date]
-      @occasion.start_time = @occasion.start_time + 8.hours
+      @occasion.repeat_until = params[:occasion_date]
     end
     
     locations_and_occasion_types
@@ -93,7 +93,10 @@ class OccasionsController < ApplicationController
       if @occasion.save
         case params[:occasion][:repeat].to_s
          when '10'
-           repeat_until_date = DateTime.new(params[:occasion][:"repeat_until(1i)"].to_i,params[:occasion][:"repeat_until(2i)"].to_i,params[:occasion][:"repeat_until(3i)"].to_i,params[:occasion][:"start_time(4i)"].to_i,params[:occasion][:"start_time(5i)"].to_i)
+           rdate = params[:occasion][:repeat_until]
+           rtime = @occasion.start_time.hour.to_s + ":" + @occasion.start_time.min.to_s
+           repeat_until_date = Time.parse(rdate + " " + rtime)
+         
            @occasion.repeat_weekly(@occasion, repeat_until_date)
         end
 
@@ -185,16 +188,26 @@ class OccasionsController < ApplicationController
     end
   end  
 
-  # Autocomplete fields
-  def auto_complete_for_occasion_location_id
-          @locations = Location.find( :all, :conditions => [ "name LIKE ?", "%#{params[:occasion][:location_id]}%" ] )
-          render :partial => 'locations'
-  end   
+  def locations # for autocomplete
+    @locations = Location.find(:all, :conditions => [ "name LIKE ?", "%#{params[:term]}%" ] )
+    
+    @locations_hash = []
+    @locations.each do |location|
+      @locations_hash << {"label" => location.name}
+    end
+    render :json => @locations_hash
+  end
 
-  def auto_complete_for_occasion_occasion_type_id
-          @occasion_types = OccasionType.find( :all, :conditions => [ "name LIKE ?", "%#{params[:occasion][:occasion_type_id]}%" ] )
-          render :partial => 'occasion_types'
-  end   
+  def occasion_types # for autocomplete
+    @occasion_types = OccasionType.find(:all, :conditions => [ "name LIKE ?", "%#{params[:term]}%" ] )
+
+    @occasion_types_hash = []
+    @occasion_types.each do |type|
+    @occasion_types_hash << {"label" => type.name}
+    end
+    render :json => @occasion_types_hash
+  end
+ 
   
 ###########
   private
@@ -260,9 +273,6 @@ class OccasionsController < ApplicationController
        first_date = first_date.utc
        last_date = last_date.utc
        
-      puts first_date
-      puts last_date
-
        @occasions = Occasion.find(:all, :conditions => ["start_time > ? AND start_time < ?", first_date.to_date, last_date.to_date],:order => "start_time ASC")
        @date = date_now.to_date
    end   

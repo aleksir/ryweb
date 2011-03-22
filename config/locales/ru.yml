@@ -35,6 +35,7 @@ ru:
       short: "%d %b, %H:%M"
       very_short: "%d.%m."
       long: "%d %B %Y, %H:%M"
+      date_picker: "%d.%m.%Y %H:%M"
 
     am: "утра"
     pm: "вечера"

@@ -26,7 +26,7 @@ class Occasion  < CustomerData
 
   def repeat_weekly(occasion, repeat_until)
   
-    while occasion.start_time.advance(:weeks => 1) < repeat_until
+    while occasion.start_time.advance(:weeks => 1) <= repeat_until
       recurring_occasion = occasion.clone
       recurring_occasion.start_time = occasion.start_time.advance(:weeks => 1)
       

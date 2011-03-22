@@ -29,6 +29,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :occasion_types, :path_prefix => '/:customer_key'
   map.occasioncalendar '/:customer_key/occasions/calendar', :controller =>'occasions', :action =>'calendar'
   map.occasionlist '/:customer_key/occasions/list', :controller =>'occasions', :action =>'list'
+  map.locations_json '/:customer_key/occasions/locations', :controller => 'occasions', :action => 'locations'
+  map.occasion_types_json '/:customer_key/occasions/occasion_types', :controller => 'occasions', :action => 'occasion_types'
   map.resources :occasions, :path_prefix => '/:customer_key'
   map.resources :locations, :path_prefix => '/:customer_key'
 

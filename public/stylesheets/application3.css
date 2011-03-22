@@ -77,6 +77,13 @@ label {
    color: gray;
 }
 
+.quickhelp {
+   margin-left: 10px;
+   margin-top: 3px;
+   font-size: 10px;
+   color: gray;
+}
+
 textarea {
  /*   width:400px;
     padding:2px;

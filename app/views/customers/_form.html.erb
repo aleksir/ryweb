@@ -1,21 +1,46 @@
   <%= f.error_messages %>
 
-    <% permitted_to? :create, :customers do %>
-      <p><%= f.label :name, 'Järjestelmän nimi' %>
-          <%= f.text_field :name %>
+      
+  <% if  permitted_to? :create, :customers %>
+  <fieldset>
+    <legend>Rauhanyhdistys.fi palvelun tiedot</legend>
+
+      <p><%= f.label :ryweb_active, 'Rauhanyhdistys.fi käytössä' %>
+        <%= f.check_box :ryweb_active %>
       </p>
-    <% end %>
+
+      <p><%= f.label :customer_type, 'Tyyppi' %>
+        <% [ [10, "Rauhanyhdistys"], [20,"Kotimaan lähetysalue"],[30,"Ulkolähetys"] ].each do |value,label| %>
+        <%= f.radio_button :customer_type, value %><%= label %>
+        <% end %>
+      </p>
+
+      <p><%= label_tag 'target_area', 'Lähetysalue' %>
+        <%= f.select :target_area, options_for_select(Customer.target_areas.collect {|p| [ p[1],p[0]] }.sort, @customer.target_area), options ={:include_blank => true} %>
+      </p>
+
+      <p><%= f.label :name, 'Järjestelmän nimi' %>
+        <%= f.text_field :name %>
+      </p>
+
+      <p><%= f.label :start_date, 'Käyttöönottopäivä' %>
+        <%= f.date_select :start_date %>
+      </p>
+
+      <p><%= label_tag 'power_base', 'Leirikeskustukialue' %>
+        <%= f.select :power_base, options_for_select(Customer.campgrounds.collect {|p| [ p[1],p[0]] }.sort, @customer.power_base), options ={:include_blank => true} %>
+      </p>
+
+       <p><%= label_tag 'language', 'Kieli' %>
+         <%= f.select :language, @customer.getOptionsForSelectList(:language), options ={:prompt => ""} %>
+       </p>
+
+  </fieldset>
+  <% end %>
+      
 
   <p><%= f.label :title, 'Yhdistyksen nimi' %>
     <%= f.text_field :title %>
-  </p>
-
-  <p><%= label_tag 'power_base', 'Leirikeskustukialue' %>
-    <%= f.select :power_base, options_for_select(Customer.campgrounds.collect {|p| [ p[1],p[0]] }.sort, @customer.power_base), options ={:include_blank => true} %>
-  </p>
-
-  <p><%= label_tag 'target_area', 'Lähetysalue' %>
-    <%= f.select :target_area, options_for_select(Customer.target_areas.collect {|p| [ p[1],p[0]] }.sort, @customer.target_area), options ={:include_blank => true} %>
   </p>
 
    <p><%= f.label :address, 'Lähiosoite' %>
@@ -47,6 +72,11 @@
     <%= f.text_field :radio_url %>
    </p>
 
+   <p><%= f.label :home_page, 'Kotisivut' %>
+    <%= f.text_field :home_page %>
+    <div class="hint">Kotisivujen osoite, jos rauhanyhdistys.fi ei käytössä</div>
+   </p>
+
   <p>
      <%= label_tag 'ui_template_id', 'Ulkoasumalli' %>
      <%= f.select :ui_template_id, @ui_templates.map {|t| [t.name, t.id ]}, {:include_blank => true}  %>
@@ -54,8 +84,5 @@
 
   <p><%= f.label :logo, 'Logo' %>
     <%= f.text_field :logo %>
-   </p>
+  </p>
 
-  <p><%= label_tag 'language', 'Kieli' %>
-   <%= f.select :language, @customer.getOptionsForSelectList(:language), options ={:prompt => ""} %>
- </p>

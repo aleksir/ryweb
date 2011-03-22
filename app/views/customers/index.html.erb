@@ -21,7 +21,7 @@
   <tr>
   	<td><%= link_to customer.name, customer_path(:id => customer) %></td>
 	<td><%= customer.title %></td>
-        <td><%=localize(customer.created_at.to_date, :format => :short) %></td>
+        <td><%=localize(customer.start_date, :format => :short) %></td>
     <td><%= link_to 'Muokkaa', edit_customer_path(:id => customer), :class => 'icon icon_edit' %>
     <%= link_to 'Poista', customer_path(:id => customer), :class => 'icon icon_delete', :confirm => 'Oletko varma?', :method => :delete %></td>
   </tr>

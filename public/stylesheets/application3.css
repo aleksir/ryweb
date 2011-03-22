@@ -51,6 +51,16 @@ td, th, p, a, div, li, address, input, textarea, select{
 
 /* Form */
 
+fieldset {
+    margin-top: 10px;
+    border:1px #cfcfcf solid;
+}
+
+legend {
+  padding: 0.2em 0.5em;
+  border:1px #cfcfcf solid;
+  }
+
 label {
   float:left;
   width:25%;

@@ -1,6 +1,6 @@
 body, p, td, div h1, h2, li, address {
     font-family: Verdana,Arial,Helvetica,sans-serif;
-    color: #2f2f2f;
+        color: #2f2f2f;
 }
 
 td, p, a, div, li, address {
@@ -23,7 +23,7 @@ h3 {
 }
 
 a, a:visited, a:active { 
-    color: #0F96B4;
+    /*color: #0F96B4; tämä väri ei tule näkyviin vaan widgetit ajaa yli */
     font-weight: bold;
 }
 

@@ -24,7 +24,9 @@
           $.timepicker.setDefaults($.timepicker.regional['fi']);
           $.datepicker.setDefaults($.datepicker.regional['fi']);
 
-          $( '#occasion_start_time' ).datetimepicker( {stepMinute: 15,
+          $( '#occasion_start_time' ).datetimepicker({
+                  buttonText: 'Valitse aika',
+                  hourGrid: 3,
                   minuteGrid: 15,
                   showWeek: true,
                   showOn: "both",
@@ -32,7 +34,8 @@
                   buttonImageOnly: true} );
        
           $( '#occasion_repeat_until' ).datepicker( {
-                  showOn: "both",
+                  showWeek: true,
+                  showOn: "button",
                   buttonImage: "/images/icon_calendar.png",
                   buttonImageOnly: true});
 	});

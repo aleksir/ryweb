@@ -4,9 +4,13 @@ class IndexController < ApplicationController
   # GET /customers.xml
  def index
     @customers = Customer.find(:all, :conditions => ["customer_type == ?",10],:order => "title ASC")
-    @international = Customer.find(:all, :conditions => ["customer_type == ?",30],:order => "title ASC")
     @customer_index = @customers.group_by { |c| c.title.first }
+
+    @international = Customer.find(:all, :conditions => ["customer_type == ?",30],:order => "title ASC")
     @international_index = @international.group_by { |c| c.title.first }
+
+    @web = Customer.find(:all, :conditions => ["radio_url != ?",""],:order => "title ASC")
+    @web_index = @web.group_by { |c| c.title.first }
 
     respond_to do |format|
       format.html { render :layout => false }# index.html.erb

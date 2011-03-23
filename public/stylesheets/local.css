@@ -36,29 +36,29 @@ a:hover {
     text-decoration: none;
 }
 
-#rauhanyhdistykset {
+.rauhanyhdistykset {
     margin: 20px;
 }
 
-#rauhanyhdistykset ul {
+.rauhanyhdistykset ul {
     list-style: none;
     padding-left: 20px;
 }
-#rauhanyhdistykset li {
+.rauhanyhdistykset li {
     padding: 2px 0 2px 0;
 }
 
-#rauhanyhdistykset li, a {
+.rauhanyhdistykset li, a {
     font-size: 12px;
 }
 
-#rauhanyhdistykset h2 {
+.rauhanyhdistykset h2 {
     font-size: 18px;
     font-weight: bold;
 }
 
 
-#rauhanyhdistykset li {
+.rauhanyhdistykset li {
     padding-left: 20px;
 }
 

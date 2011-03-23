@@ -43,76 +43,106 @@
 
           <div id="tabs">
               <ul>
-                      <li><a href="#tabs-1">Rauhanyhdistykset</a></li>
-                      <li><a href="#tabs-2">International</a></li>
+                      <li><a href="#tabs-1">Seurat Rauhanyhdistyksissä</a></li>
+                      <li><a href="#tabs-2">Radiossa</a></li>
+                      <li><a href="#tabs-3">Netissä</a></li>
+                      <li><a href="#tabs-4">Ulkomailla</a></li>
               </ul>
               <div id="tabs-1">
-                          <!-- div id="content" -->
+                        
+                  <p>Rauhanyhdistysten tehtävänä on Raamatun mukaisesti kertoa ja välittää Jumalan hyviä töitä kaikkien ihmisten kuultavaksi ja uskottavaksi. Rauhanyhdistysten järjestämät seurat, pyhäkoulut, raamattuluokat ja päiväkerhot ovat kaikille avoimia tilaisuuksia. Tervetuloa!</p>
 
-            <h1>Rauhanyhdistykset</h1>
-            <p>Rauhanyhdistysten tehtävänä on Raamatun mukaisesti kertoa ja välittää Jumalan hyviä töitä kaikkien ihmisten kuultavaksi ja uskottavaksi. Rauhanyhdistysten järjestämät seurat, pyhäkoulut, raamattuluokat ja päiväkerhot ovat kaikille avoimia tilaisuuksia. Tervetuloa!</p>
+                  <div class="rauhanyhdistykset">
+                    <ul class="kirjaimet">
+                      <% @customer_index.sort.each do |letter, customers| %>
 
-            <div id="rauhanyhdistykset">
-              <ul class="kirjaimet">
-                <% @customer_index.sort.each do |letter, customers| %>
-
-                  <li><a href="#<%= letter %>"><%= letter %></a></li>
-                <% end %>
-              </ul>
-
-                <% @customer_index.sort.each do |letter, customers| %>
-                <h2 id="<%= letter %>"><%= letter %></h2>
-                <ul>
-                  <% for customer in customers %>
-                    <% if customer.ryweb_active? %>
-                      <li><%= link_to customer.title, "#{customer.name}" %></li>
-                    <% elsif customer.home_page? %>
-                      <li class="kotisivu"><%= link_to customer.title, customer.home_page %></li>
-                    <% else %>
-                      <li><a href="#" onclick="return blind('<%= customer.id %>')"><%= customer.title %></a>
-                      <div class="blinder" id="<%= customer.id %>" style="display:none;"><%= "#{customer.address}, #{customer.zip_code} #{customer.city}<br />#{customer.phone}" %></div>
-                      </li>
-                    <% end %>
-                  <% end %>
-                </ul>
-                <% end %>
-            </div>
-        <!-- /div -->
-              </div>
-              <div id="tabs-2">
-                <h1>Welcome</h1>
-                  <p>The SRK, the Central Committee of Conservative Laestadian Congregations is the central organization that was established in 1906. It is the central organization of the 196 local congregations, association of peace, with the main office in Oulu.</p>
-
-                  <p>According to the by-laws of the SRK and the associations of peace, their purpose is “to awaken and inspire Christian faith life and to promote Christian moral habits, national sobriety and stabilize a patriotic mind among our people.”</p>
-
-                  <p>To carry out the purpose, the association does mission work domestically and abroad, does and supports child and youth work, publishes literature, newspapers, magazines and recordings. The SRK has sister organisations in Sweden and North America. In addition to these, there are association of peace in Norway, Russia and Estonia. </p>
-
-                  <div id="rauhanyhdistykset">
-                  <ul class="kirjaimet">
-                    <% @international_index.sort.each do |letter, customers| %>
-
-                      <li><a href="#<%= letter %>"><%= letter %></a></li>
-                    <% end %>
-                  </ul>
-
-                    <% @international_index.sort.each do |letter, customers| %>
-                    <h2 id="<%= letter %>"><%= letter %></h2>
-                    <ul>
-                      <% for customer in customers %>
-                        <% if customer.ryweb_active? %>
-                          <li><%= link_to customer.title, "#{customer.name}" %></li>
-                        <% elsif customer.home_page? %>
-                          <li class="kotisivu"><%= link_to customer.title, customer.home_page %></li>
-                        <% else %>
-                          <li><a href="#" onclick="return blind('<%= customer.id %>')"><%= customer.title %></a>
-                          <div class="blinder" id="<%= customer.id %>" style="display:none;"><%= "#{customer.address}, #{customer.zip_code} #{customer.city}<br />#{customer.phone}" %></div>
-                          </li>
-                        <% end %>
+                        <li><a href="#<%= letter %>"><%= letter %></a></li>
                       <% end %>
                     </ul>
-                    <% end %>
-                </div>
+
+                      <% @customer_index.sort.each do |letter, customers| %>
+                      <h2 id="<%= letter %>"><%= letter %></h2>
+                      <ul>
+                        <% for customer in customers %>
+                          <% if customer.ryweb_active? %>
+                            <li><%= link_to customer.title, "#{customer.name}" %></li>
+                          <% elsif customer.home_page? %>
+                            <li class="kotisivu"><%= link_to customer.title, customer.home_page %></li>
+                          <% else %>
+                            <li><a href="#" onclick="return blind('<%= customer.id %>')"><%= customer.title %></a>
+                            <div class="blinder" id="<%= customer.id %>" style="display:none;"><%= "#{customer.address}, #{customer.zip_code} #{customer.city}<br />#{customer.phone}" %></div>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                      <% end %>
+                  </div>
+        
               </div>
+            <div id="tabs-2">
+              <p>Radioseurojen perustarkoitus on herättää ja elvyttää kristillistä uskonelämää. Niiden sisältönä ovat saarnat, virret ja Siionin laulut. Saarnat kutsuvat Jumalan seurakunnan yhteyteen. Samalla ne vahvistavat ja tukevat Jumalan seurakunnan elävässä yhteydessä elämistä.</p>
+              <p>Radioseuroja lähetetään pääosin rauhanyhdistysten toimitaloilta.</p>
+            </div>
+            <div id="tabs-3">
+              <p>Seuraavat Rauhanyhdistykset välittävät säännöllisesti seuroja internetissä kuunneltavaksi. Tarkemmat ajat ja kuuntelulinkit löytyvät Rauhanyhdistysten websivuilta ja toimintakalentereista.</p>
+              <div class="rauhanyhdistykset">
+                <ul class="kirjaimet">
+                  <% @web_index.sort.each do |letter, customers| %>
+
+                    <li><a href="#<%= letter %>"><%= letter %></a></li>
+                  <% end %>
+                </ul>
+
+                  <% @web_index.sort.each do |letter, customers| %>
+                  <h2 id="<%= letter %>"><%= letter %></h2>
+                  <ul>
+                    <% for customer in customers %>
+                      <% if customer.ryweb_active? %>
+                        <li><%= link_to customer.title, "#{customer.name}" %></li>
+                      <% elsif customer.home_page? %>
+                        <li class="kotisivu"><%= link_to customer.title, customer.home_page %></li>
+                      <% else %>
+                        <li><a href="#" onclick="return blind('<%= customer.id %>')"><%= customer.title %></a>
+                        <div class="blinder" id="<%= customer.id %>" style="display:none;"><%= "#{customer.address}, #{customer.zip_code} #{customer.city}<br />#{customer.phone}" %></div>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                  <% end %>
+              </div>
+            </div>
+              <div id="tabs-4">
+                <p>Ulkolähetystyötä tehdään Venäjällä, Virossa, Latviassa, Saksassa, Englannissa, Norjassa, Unkarissa, Espanjassa, Keniassa sekä sisarjärjestöjen kanssa Ruotsissa, Yhdysvalloissa, Kanadassa ja Togossa.</p>
+
+                <p>Käytännön järjestelyistä vastaavat maihin perustetut rauhanyhdistykset Venäjällä, Virossa, Ruotsissa, Norjassa (Oslo), Yhdysvalloissa ja Kanadassa. Muissa maissa yksittäiset kristityt huolehtivat seurajärjestelyistä. </p>
+
+                <p>Lähetystyössä päätoimintamuotona ovat hartausseurat, joita järjestetään ulkomailla noin 600 tilaisuutta vuodessa.</p>
+                    <div class="rauhanyhdistykset">
+                      <ul class="kirjaimet">
+                        <% @international_index.sort.each do |letter, customers| %>
+
+                          <li><a href="#<%= letter %>"><%= letter %></a></li>
+                        <% end %>
+                      </ul>
+
+                        <% @international_index.sort.each do |letter, customers| %>
+                        <h2 id="<%= letter %>"><%= letter %></h2>
+                        <ul>
+                          <% for customer in customers %>
+                            <% if customer.ryweb_active? %>
+                              <li><%= link_to customer.title, "#{customer.name}" %></li>
+                            <% elsif customer.home_page? %>
+                              <li class="kotisivu"><%= link_to customer.title, customer.home_page %></li>
+                            <% else %>
+                              <li><a href="#" onclick="return blind('<%= customer.id %>')"><%= customer.title %></a>
+                              <div class="blinder" id="<%= customer.id %>" style="display:none;"><%= "#{customer.address}, #{customer.zip_code} #{customer.city}<br />#{customer.phone}" %></div>
+                              </li>
+                            <% end %>
+                          <% end %>
+                        </ul>
+                        <% end %>
+                  </div>
+                </div>
           </div>
 
             <div id="footer">

@@ -65,7 +65,7 @@ class OccasionsController < ApplicationController
       @occasion.start_time = params[:occasion_date]
       @occasion.repeat_until = params[:occasion_date]
     end
-    
+
     locations_and_occasion_types
 
     respond_to do |format|
@@ -86,6 +86,9 @@ class OccasionsController < ApplicationController
   # POST /occasions.xml
   def create
     @occasion = Occasion.new(params[:occasion])
+
+    # Update state based on the submit button which user has selected
+    @occasion.update_state(params[:commit])
 
     find_or_create_locations_and_occasion_types
     
@@ -129,6 +132,9 @@ class OccasionsController < ApplicationController
     @occasion = Occasion.with_permissions_to(:update).find(params[:id])
     find_or_create_locations_and_occasion_types
 
+    # Update state based on the submit button which user has selected
+    @occasion.update_state(params[:commit])
+    
     respond_to do |format|
       if @occasion.update_attributes(params[:occasion])
         flash[:notice] = 'Tapahtuman tiedot päivitetty.'

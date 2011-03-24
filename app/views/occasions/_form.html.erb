@@ -48,8 +48,8 @@
 <p><%= label_tag 'location_id', 'Paikka' %>
 <p><%= f.text_field :location_id, :value => @occasion.location.name %></p>
 
-<p><%= label_tag 'state', 'Tila' %>
-<%= f.select :state, @occasion.getOptionsForSelectList(:state), options ={:prompt => ""} %></p>
+<p><%= label_tag 'state', 'Tapahtuman tila' %>
+<p><%= @occasion.getOptionsForSelectList(:state).index(@occasion.state)%></p>
 
 <p><%= label_tag 'internal_info', 'Sisäinen lisätieto' %>
 <%= f.text_area :internal_info, :rows=>10 %></p>
@@ -58,8 +58,10 @@
 <%= f.text_area :public_info, :rows=>10 %></p>
 
 <p><%= label_tag 'inform_changes', 'Tiedota muutoksesta?' %>
-<%= f.select :inform_changes, @occasion.getOptionsForSelectList(:inform_changes), options ={:prompt => ""} %></p>
+<%= f.check_box :inform_changes %>
 
 <p>
-    <%= f.submit "Tallenna" %>
+    <% @occasion.getOptionsForSelectList(:state).each do |state,id| %>
+      <%= submit_tag ('Tallenna ' + state) %>
+    <% end  %>
 </p>

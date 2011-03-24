@@ -35,6 +35,11 @@ class Occasion  < CustomerData
     end
   end
 
+  def update_state(commit)
+    commit.slice!(/\w+\s/)
+    write_attribute :state, getOptionsForSelectList(:state)[commit]
+  end
+
   def getOptionsForSelectList(method)
    case method
      when :state

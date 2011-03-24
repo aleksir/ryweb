@@ -22,7 +22,7 @@
     <td><%=h person.city %></td>
     
     <td><%= link_to 'Muokkaa', edit_person_path(Customer.current.name, person), :class => 'icon icon_edit' %></td>
-    <td><%= link_to 'Poista', person_path(Customer.current.name, person), :class => 'icon icon_delete', :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Poista', person_path(Customer.current.name, person), :class => 'icon icon_delete', :confirm => 'Oletko varma?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

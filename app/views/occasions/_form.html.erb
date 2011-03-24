@@ -59,6 +59,7 @@
 
 <p><%= label_tag 'inform_changes', 'Tiedota muutoksesta?' %>
 <%= f.check_box :inform_changes %>
+<div class="hint">Valitsemalla Tiedota muutoksesta, tulee muutettu tapahtuma näkyviin julkisessa tapahtumakalenterissa niin pitkäksi aikaa, että tapahtumapäivä on umpeutunut. Käyttö on suositeltavaa kun muutos tulee nopeasti.</div>
 
 <p>
     <% @occasion.getOptionsForSelectList(:state).each do |state,id| %>

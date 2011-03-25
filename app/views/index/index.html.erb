@@ -83,7 +83,7 @@
               <p>Radioseurojen perustarkoitus on herättää ja elvyttää kristillistä uskonelämää. Niiden sisältönä ovat saarnat, virret ja Siionin laulut. Saarnat kutsuvat Jumalan seurakunnan yhteyteen. Samalla ne vahvistavat ja tukevat Jumalan seurakunnan elävässä yhteydessä elämistä.</p>
               <p>Radioseuroja lähetetään pääosin rauhanyhdistysten toimitaloilta.</p>
               
-                <table id="calendar" border="1">
+                <table id="calendar">
                 <% @occasion_months.sort.each do |month, occasions| %>
                 <thead><tr><th colspan ="5"><strong><%= t('date.month_names')[month.strftime('%m').to_i] %></strong></th></tr></thead>
                 <tbody><% for occasion in occasions %><% customer = Customer.find(occasion.customer_id) %>

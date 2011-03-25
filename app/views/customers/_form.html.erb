@@ -10,7 +10,7 @@
       </p>
 
       <p><%= f.label :customer_type, 'Tyyppi' %>
-        <% [ [10, "Rauhanyhdistys"], [20,"Kotimaan lähetysalue"],[30,"Ulkolähetys"] ].each do |value,label| %>
+        <% [ [10, "Rauhanyhdistys"], [20,"Kotimaan lähetysalue"],[30,"Ulkolähetys"],[40,"Muu"] ].each do |value,label| %>
         <%= f.radio_button :customer_type, value %><%= label %>
         <% end %>
       </p>

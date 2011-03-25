@@ -104,3 +104,55 @@ a:hover {
 .blinder {
   margin-top: 6px;
 }
+
+#calendar {
+  font-size: 110%;
+  border: 2px solid #a6c9e2;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#calendar .day, #calendar .date, #calendar .time {
+        white-space: nowrap;
+}
+
+#calendar td {
+        padding: 4px 8px;
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #d5d5d5;
+        color: #333333;
+        vertical-align: top;
+}
+
+#calendar th {
+        background-color: #d8e7f3;
+        padding: 10px 8px;
+        color: #000000;
+        text-align: left;
+        font-size: 120%;
+}
+
+#calendar tr.even td {
+        background-color: #f0f0f0;
+}
+
+#calendar tr.next td {
+        background-color: #e1f0fb;
+}
+
+#calendar td.event {
+        font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table {
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 1.1em;
+}
+
+.icon_listen { background-image: url(../images/icon_listen.png) !important; }

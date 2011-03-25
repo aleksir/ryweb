@@ -9,8 +9,11 @@ class CustomerData < ActiveRecord::Base
     super
     self.customer_id = Customer.current_id
   end
-  
 
+  class << self
+    alias :find_without_customer :find
+  end
+  
   def self.find(*args)
     retval = nil
     with_scope(CustomerData.scope_conditions) do

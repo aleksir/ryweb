@@ -24,7 +24,11 @@
       </p>
 
       <p><%= f.label :start_date, 'Käyttöönottopäivä' %>
-        <%= f.text_field :start_date, :value => localize(@customer.start_date, :format => :short) if !@customer.start_date.nil? %></p>
+        <% if @customer.start_date.nil? %>
+          <%= f.text_field :start_date %>
+        <% else %>
+          <%= f.text_field :start_date, :value => localize(@customer.start_date, :format => :short) %>
+        <% end %>
       </p>
 
       <p><%= label_tag 'power_base', 'Leirikeskustukialue' %>

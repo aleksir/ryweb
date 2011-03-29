@@ -3,10 +3,16 @@
 
 <div id="buttonbar">
 	<%= link_to 'Uusi yhdistys', new_customer_path, :class => 'button icon_add' if permitted_to? :manage, :customers %>
+  <% form_tag customers_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Hae" %>
+  <% end %>
 </div>	
 
   <%= crumbs if permitted_to? :manage, :customers %>
-  
+
+
+    
 <table style="width: 95%;">
   <thead>
   	<tr>
@@ -28,6 +34,8 @@
 <% end %>
 </tbody>
 </table>
-
+<div id ="pagination"
+  <%= will_paginate @customers, :previous_label => '&laquo; Edellinen', :next_label => 'Seuraava &raquo;' %>
+</div>
 <br />
 </div>

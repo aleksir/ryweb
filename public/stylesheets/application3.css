@@ -156,6 +156,9 @@ tr.odd {
 	text-decoration: underline;	
 }
 
+#pagination {
+    text-align: center;
+}
 .occasion_list {
     width: 98%;
 }

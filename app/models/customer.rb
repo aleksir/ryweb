@@ -10,7 +10,7 @@ class Customer < ActiveRecord::Base
   attr_accessor :forward_email
 
   def self.search(search, page)
-    paginate :per_page => 3, :page => page,
+    paginate :per_page => 20, :page => page,
            :conditions => ['name like ? OR title like ?', "%#{search}%","%#{search}%"], :order => 'name'
   end
 
